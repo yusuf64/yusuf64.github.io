@@ -57,6 +57,39 @@
     <audio data-key="76" src="sounds/tink.wav"></audio>
 
     <script>
+      function playsoundMobile() {
+        let divy = Array.from(document.querySelectorAll("div.key"));
+
+        // console.log(divy);
+
+        // divy.forEach((i) => {
+        //   let musicsource = i.children[1].textContent;
+
+        //   i.setAttribute("src", `sounds/${musicsource}.wav`);
+        // });
+
+        divy.forEach((i) =>
+          i.addEventListener("click", function (e) {
+            let currentdiv = e.currentTarget;
+            let musickeynote = currentdiv.getAttribute("data-key");
+            console.log(musickeynote);
+            console.log(currentdiv);
+            let audio = document.querySelector(
+              `audio[data-key="${musickeynote}"]`
+            );
+
+            currentdiv.classList.add("playing");
+
+            audio.currentTime = 0;
+            // console.log(audio);
+            // audio.currentTime();
+            audio.play();
+          })
+        );
+      }
+
+      playsoundMobile();
+
       function removetransition(e) {
         if (e.propertyName !== "transform") return;
 
@@ -80,7 +113,7 @@
       keys.forEach((key) =>
         key.addEventListener("transitionend", removetransition)
       );
-      console.log(keys);
+      // console.log(keys);
     </script>
   </body>
 </html>
